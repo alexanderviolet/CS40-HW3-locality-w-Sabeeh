@@ -43,29 +43,20 @@ Q1b: For testcachesim, describe in detail how performance changes as
      the size of the cache gets larger, presuming the size of the
      test array remains the same?  
 
-     Performance improves
+     Performance improves since higher hit rate and less misses. 
 
 Q1c. Is there a point beyond which performance stops improving as
      cache size increases? Why?
 
-     Yes, returns (as it gets too big we may have to search through the cache
-     more, which could take more resources and time)
+     Yes, once the cache can hold all the frequently-accessed data increasing
+     cache size more won't improve performance much more. 
 
 Q1d. Sometimes performance is excellent (that is, the cache gives us a
      very good speed up) but then making the test array just a little
      bigger reduces performance dramatically. Why?
 
-     TODO:
-
-
-
-
-
-
-
-
-
-
+     When array > what cache holds, we get capacity messes. When working set > 
+     cache capacity, we get a lot of cache misses again. 
 
 Block sizes
 -----------
@@ -78,15 +69,11 @@ Q2.  Are bigger blocks always better? Worse? Assuming the total size
      of the cache remains the same, and for an application like
      testcachesim, which block size is best?
 
+     Pros: Better spatial locality
+     Cons: Wasted data if u don't access nearby elements
 
-
-
-
-
-
-
-
-
+     For testcachesim larger blocks are probably better since ur going to access
+     nearby elements. 
 
 Writing data
 ------------
@@ -97,25 +84,21 @@ Q3.  Reread the part of the instructions that explains the
      If you understand this, then you understand a lot about how
      "write-back" caches work.
 
-
-
-
-
-
-
-
-
-
-
+     Yes. Reads_for_writes happen when writing to cahche line not already in 
+     cache so cache first reads entire block from memory before write. 
+     
+     But If block size = size of data element and writing one element at a time
+     u could avoid it. I dont think this would happen often since cache blocks
+     are usually larger than individual data elements.
 
 Q4.  Explain why, for applications that update memory repeatedly, a cache that
      performs better may finish with more dirty blocks than a cache
      that does not perform well on the same application.
 
-
-
-
-
+     Bc its keeping frequently accessed data in the cache. Poor cache will evict
+     quicker so less chance for multiple writes on the same cache line, whereas
+     an efficient cache will have higher chance for writes since it's in the
+     cache for l;onger (thus more dirty blocks)
 
 =================================================================
                      Associative caches
@@ -124,19 +107,9 @@ Q4.  Explain why, for applications that update memory repeatedly, a cache that
 Q5.  Can you describe a situation in which a fully associative cache
      will outperform a direct-mapped cache?
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+     When there are conflicts in direct-mapped cache (conflict misses)
+     If access pattern has bad spatial locality
+     If you have small cache w large working set
 
 Submit this file using script
 
